@@ -37,6 +37,7 @@ const Todo: FC<TodoProps> = ({
 }) => {
   const classes = useStyles();
   const handleToggle = (id: string, isComplete: boolean) => {
+    // ignoring the response as it is always a success
     updateTodo(id, isComplete);
     onToggle();
   };

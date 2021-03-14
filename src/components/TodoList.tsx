@@ -15,8 +15,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
-
-const TodoList: FC = () => {
+type TodoListProps = {
+  showToast: (message: string) => void;
+};
+const TodoList: FC<TodoListProps> = ({ showToast }) => {
   const classes = useStyles();
   const [todos, setTodos] = useState<TODO[]>([]);
 
@@ -52,7 +54,14 @@ const TodoList: FC = () => {
           dueDate={t.dueDate}
           id={t.id}
           isOverdue={t.isOverdue}
-          onToggle={() => handleToggle(t.id)}
+          onToggle={() => {
+            handleToggle(t.id);
+            showToast(
+              `'${t.description}' has been marked ${
+                t.isComplete ? 'completed' : 'not completed'
+              }`
+            );
+          }}
         />
       ))}
     </List>

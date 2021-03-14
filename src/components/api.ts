@@ -17,7 +17,7 @@ export const fetchTodos = async (): Promise<TODO[]> => {
 };
 
 export const updateTodo = async (id: string, isComplete: boolean) => {
-  const response = await fetch(`${API_URL}/patch/${id}`, {
+  await fetch(`${API_URL}/patch/${id}`, {
     headers,
     method: 'PATCH',
     body: JSON.stringify({ isComplete }),
