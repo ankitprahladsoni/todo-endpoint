@@ -57,7 +57,7 @@ const TodoList: FC<TodoListProps> = ({ showToast }) => {
           onToggle={() => {
             handleToggle(t.id);
             showToast(
-              `'${t.description}' has been marked ${
+              `'${t.description}' has been marked as ${
                 t.isComplete ? 'completed' : 'not completed'
               }`
             );
