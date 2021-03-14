@@ -6,6 +6,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { updateTodo } from './api';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +25,7 @@ type TodoProps = {
   isComplete: boolean;
   dueDate?: Date;
   isOverdue: boolean;
+  onToggle: () => void;
 };
 const Todo: FC<TodoProps> = ({
   id,
@@ -31,10 +33,12 @@ const Todo: FC<TodoProps> = ({
   isComplete,
   dueDate,
   isOverdue,
+  onToggle,
 }) => {
   const classes = useStyles();
-  const handleToggle = (id: string) => {
-    console.log('updating', id);
+  const handleToggle = (id: string, isComplete: boolean) => {
+    updateTodo(id, isComplete);
+    onToggle();
   };
 
   const className = isComplete
@@ -50,7 +54,7 @@ const Todo: FC<TodoProps> = ({
       button
       divider
       className={className}
-      onClick={() => handleToggle(id)}
+      onClick={() => handleToggle(id, isComplete)}
     >
       <ListItemIcon>
         <Checkbox edge="start" checked={isComplete} tabIndex={-1} />

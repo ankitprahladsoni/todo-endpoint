@@ -31,6 +31,17 @@ const TodoList: FC = () => {
 
   const sortedTodos = sortTodos(todos);
 
+  const handleToggle = (id: string) => {
+    const updatedTodos = [...todos].map((t) => {
+      if (t.id === id) {
+        t.isComplete = !t.isComplete;
+      }
+      return t;
+    });
+
+    setTodos(updatedTodos);
+  };
+
   return (
     <List className={classes.root}>
       {sortedTodos.map((t) => (
@@ -41,6 +52,7 @@ const TodoList: FC = () => {
           dueDate={t.dueDate}
           id={t.id}
           isOverdue={t.isOverdue}
+          onToggle={() => handleToggle(t.id)}
         />
       ))}
     </List>

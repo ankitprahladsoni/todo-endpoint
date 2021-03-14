@@ -8,7 +8,7 @@ const headers = { 'X-Api-Key': API_KEY };
 
 export const fetchTodos = async (): Promise<TODO[]> => {
   const response = await fetch(`${API_URL}/get`, { headers });
-  const todos = (await response.json()) as TODOResponse[];
+  const todos: TODOResponse[] = await response.json();
   return todos.map((t) => ({
     ...t,
     dueDate: t.dueDate ? new Date(t.dueDate) : undefined,
@@ -16,6 +16,10 @@ export const fetchTodos = async (): Promise<TODO[]> => {
   }));
 };
 
-export const updateTodo = async () => {
-  const response = await fetch(API_URL, { headers, method: 'PATCH' });
+export const updateTodo = async (id: string, isComplete: boolean) => {
+  const response = await fetch(`${API_URL}/patch/${id}`, {
+    headers,
+    method: 'PATCH',
+    body: JSON.stringify({ isComplete }),
+  });
 };
