@@ -1,4 +1,4 @@
-import { sortTodos } from './utils';
+import { sortTodos } from '.';
 
 it('should sort the todos properly', () => {
   const todos = [

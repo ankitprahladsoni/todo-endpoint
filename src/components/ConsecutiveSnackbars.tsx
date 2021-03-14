@@ -1,6 +1,3 @@
-/**
- * Shamelessly copied from Material UI docs
- */
 import { FC, useEffect, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -31,6 +28,9 @@ type Props = {
   isopen: boolean;
 };
 
+/**
+ * Shamelessly copied from Material UI docs
+ */
 const ConsecutiveSnackbars: FC<Props> = ({ message, isopen }) => {
   const [snackPack, setSnackPack] = useState<SnackbarMessage[]>([]);
   const [open, setOpen] = useState(isopen);
@@ -56,7 +56,7 @@ const ConsecutiveSnackbars: FC<Props> = ({ message, isopen }) => {
   }, [message]);
 
   const handleClose = (
-    event: React.SyntheticEvent | MouseEvent,
+    _event: React.SyntheticEvent | MouseEvent,
     reason?: string
   ) => {
     if (reason === 'clickaway') {

@@ -1,4 +1,4 @@
-import { TODO, TODOResponse } from './model';
+import { TODO, TODOResponse } from '../components/model';
 
 const API_KEY =
   'PMAK-5ef63db179d23c004de50751-10300736bc550d2a891dc4355aab8d7a5c';

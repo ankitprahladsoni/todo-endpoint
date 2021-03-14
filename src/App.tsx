@@ -1,7 +1,7 @@
-import './App.css';
-import TodoList from './components/TodoList';
 import { useState } from 'react';
+import TodoList from './components/TodoList';
 import ConsecutiveSnackbars from './components/ConsecutiveSnackbars';
+import './App.css';
 
 function App() {
   const [open, setOpen] = useState(false);

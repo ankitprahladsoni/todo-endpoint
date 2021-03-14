@@ -1,10 +1,10 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import List from '@material-ui/core/List';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { fetchTodos as fetchTodosAPI } from './api';
+import { fetchTodos as fetchTodosAPI } from '../api';
 import { TODO } from './model';
 import Todo from './Todo';
-import { sortTodos } from './utils';
+import { sortTodos } from '../utils';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

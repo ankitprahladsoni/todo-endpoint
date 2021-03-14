@@ -1,4 +1,4 @@
-import { TODO } from './model';
+import { TODO } from '../components/model';
 
 export const sortTodos = (todos: TODO[]): TODO[] => {
   return [...todos].sort((t1, t2) => {

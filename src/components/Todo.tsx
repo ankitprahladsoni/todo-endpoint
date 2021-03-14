@@ -6,7 +6,7 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import { updateTodo } from './api';
+import { updateTodo } from '../api';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
