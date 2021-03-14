@@ -5,6 +5,18 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Checkbox from '@material-ui/core/Checkbox';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    overdue: { backgroundColor: theme.palette.error.main },
+    incompleted: { backgroundColor: theme.palette.primary.light },
+    completed: {
+      backgroundColor: theme.palette.success.main,
+      textDecoration: 'line-through',
+    },
+  })
+);
 
 type TodoProps = {
   id: string;
@@ -20,18 +32,32 @@ const Todo: FC<TodoProps> = ({
   dueDate,
   isOverdue,
 }) => {
+  const classes = useStyles();
   const handleToggle = (id: string) => {
     console.log('updating', id);
   };
 
+  const className = isComplete
+    ? classes.completed
+    : isOverdue
+    ? classes.overdue
+    : classes.incompleted;
+
   return (
-    <ListItem role={undefined} dense button onClick={() => handleToggle(id)}>
+    <ListItem
+      role={undefined}
+      dense
+      button
+      divider
+      className={className}
+      onClick={() => handleToggle(id)}
+    >
       <ListItemIcon>
         <Checkbox edge="start" checked={isComplete} tabIndex={-1} />
       </ListItemIcon>
       <ListItemText id={id} primary={description} />
       <ListItemSecondaryAction>
-        {dueDate?.toDateString()}
+        {dueDate?.toLocaleDateString()}
       </ListItemSecondaryAction>
     </ListItem>
   );

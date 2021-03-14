@@ -1,17 +1,20 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import List from '@material-ui/core/List';
-import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { fetchTodos as fetchTodosAPI } from './api';
 import { TODO } from './model';
 import Todo from './Todo';
+import { sortTodos } from './utils';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '50%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {
+      width: '100%',
+      margin: 'auto',
+      maxWidth: 360,
+    },
+  })
+);
 
 const TodoList: FC = () => {
   const classes = useStyles();
@@ -24,35 +27,13 @@ const TodoList: FC = () => {
 
   useEffect(() => {
     fetchTodo();
-  }, []);
+  }, [fetchTodo]);
 
-  const overdueTodos: TODO[] = [];
-  const incompleteTodos = [];
-  const completeTodos = [];
-
-  todos
-    .sort((t1, t2) => {
-      if (!t1.dueDate) {
-        return 1;
-      }
-      if (!t2.dueDate) {
-        return -1;
-      }
-      return t1.dueDate.getTime() - t2.dueDate.getTime();
-    })
-    .forEach((t) => {
-      if (t.isComplete) {
-        completeTodos.push(t);
-      } else if (t.isOverdue) {
-        overdueTodos.push(t);
-      } else {
-        incompleteTodos.push(t);
-      }
-    });
+  const sortedTodos = sortTodos(todos);
 
   return (
     <List className={classes.root}>
-      {overdueTodos.map((t) => (
+      {sortedTodos.map((t) => (
         <Todo
           key={t.id}
           description={t.description}
